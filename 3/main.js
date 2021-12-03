@@ -25,7 +25,7 @@ function prepareLifeSupportValues(
     predicate
 ) {
     for(let i = 0; i < input[0].length; i++) {
-        let oneAmount = input.map(it => it[i]).filter(it => it == '1').length
+        let oneAmount = input.filter(it => it[i] == '1').length
         let zeroAmount = input.length - oneAmount;
         if (predicate(oneAmount, zeroAmount)) {
             input = input.filter(it => it[i] == '1')
