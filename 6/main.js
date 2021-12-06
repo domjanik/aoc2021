@@ -38,4 +38,4 @@ function simulateFishLifetime(input, days) {
 }
 
 console.log(`After 80 days there will be : ${simulateFishLifetime(fishes, 80)} fishes`)
-console.log(`After 256 days there will be : ${simulateFishLifetime(fishes, 256)} fishes`)
+console.log(`After 256 days there will be : ${simulateFishLifetime(fishes, 10000)} fishes`)
