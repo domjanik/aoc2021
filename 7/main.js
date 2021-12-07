@@ -9,7 +9,7 @@ function calcUsedFuel(crab,position) {
     }
 }
 
-function calcCrabPosition(input) {
+function calcCrabFuelUsage(input) {
     const sortedCrabs = [...input].sort((a,b) => a-b);
     const lastCrab = sortedCrabs.pop();
     const board = {};
@@ -31,7 +31,7 @@ function calcCrabPosition(input) {
     return lowestFuelUsage;
 }
 
-function calcCrabPositionProgressive(input) {
+function calcCrabFuelUsageProgressive(input) {
     const sortedCrabs = [...input].sort((a,b) => a-b);
     const lastCrab = sortedCrabs.pop();
     const board = {};
@@ -55,5 +55,5 @@ function calcCrabPositionProgressive(input) {
     return lowestFuelUsage;
 }
 
-console.log(`Fuel needed : ${calcCrabPosition(crabs)}`)
-console.log(`Fuel needed in progressive rate : ${calcCrabPositionProgressive(crabs)}`)
+console.log(`Fuel needed : ${calcCrabFuelUsage(crabs)}`)
+console.log(`Fuel needed in progressive rate : ${calcCrabFuelUsageProgressive(crabs)}`)
