@@ -1,7 +1,7 @@
 const fs = require('fs');
 const crabs = fs.readFileSync('input.txt', 'utf8').split(',').map(crab => Number(crab));
 
-function usedFuel(crab,position) {
+function calcUsedFuel(crab,position) {
     if(crab > position) {
         return crab - position;
     } else {
@@ -19,7 +19,7 @@ function calcCrabPosition(input) {
     }
     for(let boardPosition = 0; boardPosition < lastCrab; boardPosition++){
         for(const crab of input) {
-            board[boardPosition] += usedFuel(crab, boardPosition);
+            board[boardPosition] += calcUsedFuel(crab, boardPosition);
         }
     }
 
@@ -42,8 +42,8 @@ function calcCrabPositionProgressive(input) {
 
     for(let boardPosition = 0 ; boardPosition < lastCrab; boardPosition++){
         for(const crab of input) {
-            const diff = usedFuel(crab, boardPosition);
-            board[boardPosition] += (diff  * (diff + 1)) / 2;
+            const usedFuel = calcUsedFuel(crab, boardPosition);
+            board[boardPosition] += (usedFuel  * (usedFuel + 1)) / 2;
         }
     }
     
