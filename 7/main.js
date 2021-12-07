@@ -1,32 +1,59 @@
 const fs = require('fs');
-const crabs = fs.readFileSync('input.txt', 'utf8')
-.split(',').map(crab => Number(crab));
-const testCrabs = [16,1,2,0,4,2,7,1,2,14]
-//Most popular position : 8;
+const crabs = fs.readFileSync('input.txt', 'utf8').split(',').map(crab => Number(crab));
 
-function calcCrabPosition(input) {
-    let sortedCrabs = input.sort((a,b) => a-b)
-    let initialPositionAmount = {}
-    sortedCrabs.forEach(element => {
-        initialPositionAmount[element] = (initialPositionAmount[element] || 0) + 1
-    });
-    console.log(initialPositionAmount)
-    let mostPopularInitialPositionAmount = Object.keys(initialPositionAmount).map(key => initialPositionAmount[key]).sort((a,b) => a-b).pop();
-    let mostPopularInitialPositions = Object.keys(initialPositionAmount).filter(el => initialPositionAmount[el] === mostPopularInitialPositionAmount)
-    let mostPopularInitialPosition = mostPopularInitialPositions[0];
-    let usedFuel = 0;
-
-    input.forEach(crab => {
-        let fuelToUse = 0;
-        if(crab > mostPopularInitialPosition) {
-            fuelToUse = crab - mostPopularInitialPosition;
-        } else {
-            fuelToUse = mostPopularInitialPosition - crab;
-        }
-        usedFuel += fuelToUse
-    })
-
-    return usedFuel
+function usedFuel(crab,position) {
+    if(crab > position) {
+        return crab - position;
+    } else {
+        return position - crab;
+    }
 }
 
-console.log(calcCrabPosition(crabs))
+function calcCrabPosition(input) {
+    const sortedCrabs = [...input].sort((a,b) => a-b);
+    const lastCrab = sortedCrabs.pop();
+    const board = {};
+    let lowestFuelUsage = null;
+    for(let boardPosition = 0 ; boardPosition < lastCrab; boardPosition++) {
+        board[boardPosition] = 0;
+    }
+    for(let boardPosition = 0; boardPosition < lastCrab; boardPosition++){
+        for(const crab of input) {
+            board[boardPosition] += usedFuel(crab, boardPosition);
+        }
+    }
+
+    Object.keys(board).forEach(key => {
+        if(lowestFuelUsage === null || lowestFuelUsage > board[key])
+        lowestFuelUsage = board[key];
+    })
+    
+    return lowestFuelUsage;
+}
+
+function calcCrabPositionProgressive(input) {
+    const sortedCrabs = [...input].sort((a,b) => a-b);
+    const lastCrab = sortedCrabs.pop();
+    const board = {};
+    let lowestFuelUsage = null;
+    for(let boardPosition = 0 ; boardPosition < lastCrab; boardPosition++){
+        board[boardPosition] = 0;
+    }
+
+    for(let boardPosition = 0 ; boardPosition < lastCrab; boardPosition++){
+        for(const crab of input) {
+            const diff = usedFuel(crab, boardPosition);
+            board[boardPosition] += (diff  * (diff + 1)) / 2;
+        }
+    }
+    
+    Object.keys(board).forEach(key => {
+        if(lowestFuelUsage === null || lowestFuelUsage > board[key])
+        lowestFuelUsage = board[key];
+    })
+
+    return lowestFuelUsage;
+}
+
+console.log(`Fuel needed : ${calcCrabPosition(crabs)}`)
+console.log(`Fuel needed in progressive rate : ${calcCrabPositionProgressive(crabs)}`)
