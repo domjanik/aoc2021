@@ -32,13 +32,13 @@ function step(data) {
     steps++;
     every((x,y) => data[y][x]++);
     while (markNewFlashes(data)) {
-        every((x,y,d) => {
-            if (d != 'flash') return;
+        every((x,y, octopus) => {
+            if (octopus != 'flash') return;
             every((u,v,q) => !isNaN(q) && data[v][u]++, {x:[x-1, x+1], y:[y-1, y+1]})
             data[y][x] = 'd';
         })
     }
-    every((x,y,d) => (d == 'd') && (data[y][x] = 0));
+    every((x,y,octopus) => (octopus == 'd') && (data[y][x] = 0));
     return data;
 }
 
