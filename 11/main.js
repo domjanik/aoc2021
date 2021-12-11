@@ -18,7 +18,7 @@ function markNewFlashes(data) {
     every((x,y,d) => {
         if (isNaN(d) || d <= 9) return;
         flashes++;
-        data[y][x] = 'f';
+        data[y][x] = 'flash';
         flashable = true;
     })
     return flashable;
@@ -33,7 +33,7 @@ function step(data) {
     every((x,y) => data[y][x]++);
     while (markNewFlashes(data)) {
         every((x,y,d) => {
-            if (d != 'f') return;
+            if (d != 'flash') return;
             every((u,v,q) => !isNaN(q) && data[v][u]++, {x:[x-1, x+1], y:[y-1, y+1]})
             data[y][x] = 'd';
         })
