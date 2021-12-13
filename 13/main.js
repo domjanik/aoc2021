@@ -82,7 +82,6 @@ function countDots(dots, folds) {
 
   return board;
 }
-console.log();
 console.table(
   countDots(dots, folds)
     .map((row) => row.map((dot) => (dot === "#" ? "░" : ".")).join(""))
