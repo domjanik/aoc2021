@@ -24,12 +24,12 @@ function doInsertion(input, count) {
         }
     }
 
-    return transformedInput.join('');
+    return transformedInput;
 }
 
 function countElements(input) {
     let elements = {};
-    input.split('').forEach(elem => {
+    input.forEach(elem => {
         elements[elem] ? elements[elem]++ : elements[elem] = 1;
     })
     return {
