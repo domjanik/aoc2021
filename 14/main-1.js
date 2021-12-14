@@ -24,12 +24,12 @@ function doInsertion(input, count) {
         }
     }
 
-    return transformedInput;
+    return transformedInput.join('');
 }
 
 function countElements(input) {
     let elements = {};
-    input.forEach(elem => {
+    input.split('').forEach(elem => {
         elements[elem] ? elements[elem]++ : elements[elem] = 1;
     })
     return {
@@ -39,8 +39,7 @@ function countElements(input) {
 }
 
 console.time('counting')
-let transformedPolymer = doInsertion(input, 20);
-console.log(`Result: ${transformedPolymer}`)
-// let countedElements = countElements(transformedPolymer)
-// console.log(`Most popular element : ${countedElements.max}, least popular element : ${countedElements.min}, diff : ${countedElements.max - countedElements.min}`)
-console.timeEnd('counting')
+let transformedPolymer = doInsertion(input, 10);
+let countedElements = countElements(transformedPolymer)
+console.log(`Most popular element : ${countedElements.max}, least popular element : ${countedElements.min}, diff : ${countedElements.max - countedElements.min}`)
+console.timeEnd('counting') 
