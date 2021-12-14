@@ -39,8 +39,8 @@ function countElements(input) {
 }
 
 console.time('counting')
-let transformedPolymer = doInsertion(input, 40);
+let transformedPolymer = doInsertion(input, 20);
 console.log(`Result: ${transformedPolymer}`)
-let countedElements = countElements(transformedPolymer)
-console.log(`Most popular element : ${countedElements.max}, least popular element : ${countedElements.min}, diff : ${countedElements.max - countedElements.min}`)
+// let countedElements = countElements(transformedPolymer)
+// console.log(`Most popular element : ${countedElements.max}, least popular element : ${countedElements.min}, diff : ${countedElements.max - countedElements.min}`)
 console.timeEnd('counting')
