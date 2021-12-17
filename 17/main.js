@@ -39,7 +39,7 @@ function findHighestY(data) {
     let highestY = -999;
     let tryCounter = 0;
 
-    for (let rowIndex = data.yMin; rowIndex < -data.yMin; rowIndex++) {
+    for (let rowIndex = data.yMin; rowIndex < 999; rowIndex++) {
         for (let colIndex = data.xMax; colIndex > 0; colIndex--) {
             let throwResult = throwProbe(colIndex, rowIndex, data);
             if (throwResult != null) {
